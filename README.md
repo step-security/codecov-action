@@ -4,6 +4,10 @@
 
 ### Easily upload coverage reports to Codecov from GitHub Actions
 
+## v7 Release
+
+`v7` of the Codecov GitHub Action bumps the [Codecov Wrapper](https://github.com/codecov/wrapper) submodule, which now fetches the Codecov Uploader PGP verification key from the `codecovsecops` Keybase account.
+
 ## Usage
 
 > [!CAUTION]
@@ -27,8 +31,8 @@ Inside your `.github/workflows/workflow.yml` file:
 
 ```yaml
 steps:
-  - uses: actions/checkout@v6
-  - uses: step-security/codecov-action@v6
+  - uses: actions/checkout@v7
+  - uses: step-security/codecov-action@v7
     with:
       fail_ci_if_error: true # optional (default = false)
       files: ./coverage1.xml,./coverage2.xml # optional
@@ -42,8 +46,8 @@ The Codecov token can also be passed in via environment variables:
 
 ```yaml
 steps:
-  - uses: actions/checkout@v6
-  - uses: step-security/codecov-action@v6
+  - uses: actions/checkout@v7
+  - uses: step-security/codecov-action@v7
     with:
       fail_ci_if_error: true # optional (default = false)
       files: ./coverage1.xml,./coverage2.xml # optional
@@ -62,7 +66,7 @@ steps:
 As an alternative to Codecov upload tokens, you can choose to use OIDC as your upload authentication method by setting the `use_oidc` argument:
 
 ```yaml
-- uses: step-security/codecov-action@v6
+- uses: step-security/codecov-action@v7
   with:
     use_oidc: true
 ```
@@ -149,7 +153,7 @@ jobs:
       OS: ${{ matrix.os }}
       PYTHON: "3.10"
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
@@ -160,7 +164,7 @@ jobs:
           pip install pytest-cov
           pytest --cov=./ --cov-report=xml
       - name: Upload coverage to Codecov
-        uses: step-security/codecov-action@v6
+        uses: step-security/codecov-action@v7
         with:
           directory: ./coverage/reports/
           env_vars: OS,PYTHON
